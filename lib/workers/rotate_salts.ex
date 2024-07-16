@@ -4,6 +4,6 @@ defmodule Plausible.Workers.RotateSalts do
 
   @impl Oban.Worker
   def perform(_job) do
-    Plausible.Session.Salts.rotate()
+    #Plausible.Session.Salts.rotate()
   end
 end
