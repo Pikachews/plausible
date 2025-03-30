@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GHCR_REPO: ghcr.io/plausible/community-edition
+  GHCR_REPO: ghcr.io/pikachews/plausible
 
 jobs:
   build:
@@ -74,15 +74,6 @@ jobs:
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 1
-
-      - name: Notify team on failure
-        if: ${{ failure() }}
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: ${{ secrets.BUILD_NOTIFICATION_URL }}
-          method: "POST"
-          customHeaders: '{"Content-Type": "application/json"}'
-          data: '{"content": "<a href=\"https://github.com/plausible/analytics/actions/workflows/build-public-images-ghcr.yml\">Build failed</a>"}'
 
   push:
     runs-on: ubuntu-latest
